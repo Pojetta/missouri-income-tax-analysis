@@ -1,0 +1,12 @@
+Model: Linear Regression
+
+Performance Metrics:
+R-squared (R^2): 0.9440
+Mean Squared Error (MSE): 131540289029687024.0000
+
+Model Coefficients:
+Year: -158176212.4269
+Sales Tax ($): -0.9083
+Other Revenue ($): 0.2671
+
+Intercept: 320150104388.1411

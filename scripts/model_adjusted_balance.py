@@ -21,10 +21,12 @@ model.fit(X_train, y_train)
 # Predictions on test set (for evaluation)
 y_pred = model.predict(X_test)
 
-print("Predicted Budget Balances:", y_pred)
-print("MSE:", mean_squared_error(y_test, y_pred))
-
+# Define metrics (FIX)
+mse = mean_squared_error(y_test, y_pred)
 r2 = r2_score(y_test, y_pred)
+
+print("Predicted Budget Balances:", y_pred)
+print("MSE:", mse)
 print("R²:", r2)
 
 comparison = pd.DataFrame({
@@ -36,6 +38,22 @@ print(comparison)
 
 # Predictions for full dataset (for visualization)
 y_pred_all = model.predict(X)
+
+# Save model results to a text file
+output_file = "model_results.txt"
+
+with open(output_file, "w") as f:
+    f.write("Model: Linear Regression\n\n")
+
+    f.write("Performance Metrics:\n")
+    f.write(f"R-squared (R^2): {r2:.4f}\n")
+    f.write(f"Mean Squared Error (MSE): {mse:.4f}\n\n")
+
+    f.write("Model Coefficients:\n")
+    for name, coef in zip(X.columns, model.coef_):
+        f.write(f"{name}: {coef:.4f}\n")
+
+    f.write(f"\nIntercept: {model.intercept_:.4f}\n")
 
 # Plot
 plt.scatter(y, y_pred_all, color="#6FB5CB", s=40, alpha=0.7)
